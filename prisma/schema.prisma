@@ -19,9 +19,18 @@ model Doctor {
 model Appointment {
   id           Int      @default(autoincrement()) @id
   practiceName String
-  date         DateTime @default("2020-03-19T14:21:00+02:00")
-  time         DateTime @default("2020-03-19T14:21:00+02:00")
+  date         DateTime @default("2020-03-19T12:21:00+00:00")
   reason       String
-  doctor       Doctor   @relation(fields: [doctorId], references: [id])
   doctorId     Int
+  // patientId    Int
+  // patient      Patient  @relation(fields: [patientId], references: [id])
+  doctor       Doctor   @relation(fields: [doctorId], references: [id])
 }
+
+// model Patient {
+//   id           Int           @default(autoincrement()) @id
+//   firstName    String
+//   lastName     String
+//   DOB          DateTime
+//   appointments Appointment[]
+// }
