@@ -1,0 +1,27 @@
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOWDB")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Doctor {
+  id           Int           @default(autoincrement()) @id
+  firstName    String
+  lastName     String
+  speciality   String
+  appointments Appointment[]
+}
+
+model Appointment {
+  id           Int      @default(autoincrement()) @id
+  practiceName String
+  date         DateTime @default("2020-03-19T14:21:00+02:00")
+  time         DateTime @default("2020-03-19T14:21:00+02:00")
+  reason       String
+  doctor       Doctor   @relation(fields: [doctorId], references: [id])
+  doctorId     Int
+}
